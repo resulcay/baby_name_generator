@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'name_pool.dart';
@@ -18,11 +17,11 @@ class _FavoriteNameState extends State<FavoriteName> {
     return Scaffold(
       backgroundColor: Colors.grey,
       appBar: AppBar(
-        title: Text('Favori İsimlerim'),
+        title: const Text('Favori İsimlerim'),
         backgroundColor: Colors.teal,
       ),
       body: ListView.builder(
-          padding: EdgeInsets.all(4),
+          padding: const EdgeInsets.all(4),
           itemCount: 5,
           itemBuilder: (context, _) {
             return boyListTile;
@@ -32,20 +31,20 @@ class _FavoriteNameState extends State<FavoriteName> {
 }
 
 ListTile girlListTile = ListTile(
-  title: Text("gname"),
+  title: const Text("gname"),
   tileColor: Colors.pink,
-  leading: Icon(Icons.favorite),
+  leading: const Icon(Icons.favorite),
   onTap: () {
-    Text('gname exp');
+    const Text('gname exp');
   },
 );
 
 ListTile boyListTile = ListTile(
-  title: Text('Hakan'),
-  subtitle: Text('Hükümdar anlamına gelir'),
+  title: const Text('Hakan'),
+  subtitle: const Text('Hükümdar anlamına gelir'),
   tileColor: Colors.indigo,
-  leading: Icon(Icons.favorite),
+  leading: const Icon(Icons.favorite),
   onTap: () {
-    Text('bname exp');
+    const Text('bname exp');
   },
 );

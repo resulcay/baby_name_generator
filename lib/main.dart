@@ -1,10 +1,9 @@
 import 'package:baby_name_generator/favorite_names.dart';
 import 'package:baby_name_generator/result_page.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(BebekUygulamasi());
+  runApp(const BebekUygulamasi());
 }
 
 class BebekUygulamasi extends StatefulWidget {
@@ -40,19 +39,11 @@ class _BebekIsimState extends State<BebekIsim> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white12,
-        appBar: AppBar(
-          title: Text(
-            'Bebeğime İsim',
-            style: TextStyle(color: Colors.black87),
-          ),
-          centerTitle: true,
-          backgroundColor: Colors.teal,
-        ),
         body: Center(
           child: Container(
-            margin: EdgeInsets.only(right: 0, top: 8),
+            margin: const EdgeInsets.only(right: 0, top: 8),
             alignment: Alignment.bottomCenter,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
                   topRight: Radius.elliptical(0.0, 0.0),
                   topLeft: Radius.elliptical(50.0, 50.0),
@@ -64,22 +55,24 @@ class _BebekIsimState extends State<BebekIsim> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                  margin: EdgeInsets.only(top: 20),
+                  margin: const EdgeInsets.only(top: 20),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Text(
+                      const Text(
                         'Favori İsimlerim',
                         style: TextStyle(fontSize: 17),
                       ),
-                      TextButton(
+                      IconButton(
                         onPressed: () {
                           Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => FavoriteName()));
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const FavoriteName(),
+                            ),
+                          );
                         },
-                        child: Icon(
+                        icon: const Icon(
                           Icons.favorite,
                           color: Colors.red,
                           size: 30,
@@ -95,7 +88,7 @@ class _BebekIsimState extends State<BebekIsim> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(
+                            const Text(
                               'KIZ',
                               style: TextStyle(
                                   fontSize: 20,
@@ -126,7 +119,7 @@ class _BebekIsimState extends State<BebekIsim> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(
+                            const Text(
                               'ERKEK',
                               style: TextStyle(
                                   fontSize: 20,
