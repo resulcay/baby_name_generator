@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 
 import 'favorite_names.dart';
 
-class BebekIsim extends StatefulWidget {
-  const BebekIsim({Key? key}) : super(key: key);
+class HomeView extends StatefulWidget {
+  const HomeView({Key? key}) : super(key: key);
   @override
-  _BebekIsimState createState() => _BebekIsimState();
+  _HomeViewState createState() => _HomeViewState();
 }
 
-class _BebekIsimState extends State<BebekIsim> {
+class _HomeViewState extends State<HomeView> {
   String? kontrol;
 
   @override
@@ -20,14 +20,17 @@ class _BebekIsimState extends State<BebekIsim> {
         body: Center(
           child: Container(
             alignment: Alignment.bottomCenter,
-            decoration: const BoxDecoration(
-                borderRadius: BorderRadius.only(
+            decoration: BoxDecoration(
+                borderRadius: const BorderRadius.only(
                   topRight: Radius.elliptical(0.0, 0.0),
                   topLeft: Radius.elliptical(50.0, 50.0),
                   bottomRight: Radius.elliptical(50.0, 50.0),
                   bottomLeft: Radius.elliptical(50.0, 50.0),
                 ),
-                color: Colors.teal),
+                gradient: LinearGradient(colors: [
+                  Colors.pink.shade200,
+                  Colors.teal.shade300,
+                ])),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -65,12 +68,12 @@ class _BebekIsimState extends State<BebekIsim> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const Text(
+                            Text(
                               'KIZ',
                               style: TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.pinkAccent),
+                                  color: Colors.pink.shade800),
                             ),
                             TextButton(
                               onPressed: () {
