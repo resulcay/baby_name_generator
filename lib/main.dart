@@ -41,7 +41,6 @@ class _BebekIsimState extends State<BebekIsim> {
         backgroundColor: Colors.white12,
         body: Center(
           child: Container(
-            margin: const EdgeInsets.only(right: 0, top: 8),
             alignment: Alignment.bottomCenter,
             decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
