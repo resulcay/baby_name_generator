@@ -1,66 +1,55 @@
 import 'dart:math';
 
-import 'package:baby_name_generator/constants/name_pool.dart';
-import 'package:favorite_button/favorite_button.dart';
+import 'package:baby_name_generator/firebase.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class GeneratedName extends StatefulWidget {
-  final String? kontrol;
-  const GeneratedName({Key? key, this.kontrol}) : super(key: key);
+class ResultPage extends StatefulWidget {
+  const ResultPage({Key? key, required this.isGirl}) : super(key: key);
+
+  final bool isGirl;
   @override
-  _GeneratedNameState createState() => _GeneratedNameState(kontrol);
+  State<ResultPage> createState() => _ResultPageState();
 }
 
-class _GeneratedNameState extends State<GeneratedName> {
-  String? kontrol;
-
-  _GeneratedNameState(this.kontrol);
-
-  GirlNamePool extactgirl_1 = GirlNamePool();
-  BoyNamePool extractboy_1 = BoyNamePool();
-
+class _ResultPageState extends State<ResultPage> {
   @override
   Widget build(BuildContext context) {
-    int randomNumber = Random().nextInt(10);
+    int randomNumberForGirls = Random().nextInt(3);
+    int randomNumberForBoys = Random().nextInt(3);
     return Scaffold(
-      backgroundColor: Colors.grey,
-      appBar: AppBar(
-        backgroundColor: Colors.teal,
-        title: const Text('Rastgele İsim Bulundu!'),
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                kontrol == 'ERKEK'
-                    ? extractboy_1.boyNames[randomNumber].bname.toString()
-                    : extactgirl_1.girlNames[randomNumber].gname.toString(),
-                style: const TextStyle(
-                  color: Colors.black87,
-                  fontSize: 20,
-                ),
-              ),
-              FavoriteButton(
-                isFavorite: false,
-                // iconDisabledColor: Colors.white,
-                valueChanged: (_isFavorite) {},
-              ),
-            ],
-          ),
-          Text(
-            kontrol == 'ERKEK'
-                ? extractboy_1.boyNames[randomNumber].bexplanation.toString()
-                : extactgirl_1.girlNames[randomNumber].gexplanation.toString(),
-            style: const TextStyle(
-              color: Colors.black87,
-              fontSize: 20,
-            ),
-          ),
-        ],
+      body: Center(
+        child: StreamBuilder(
+            stream: widget.isGirl == true
+                ? girlMethod().snapshots()
+                : boyMethod().snapshots(),
+            builder: (BuildContext context, AsyncSnapshot asyncsnaphot) {
+              if (asyncsnaphot.hasError) {
+                const Center(
+                  child: Text("An Error Occured"),
+                );
+              } else if (asyncsnaphot.hasData) {
+                List<DocumentSnapshot> documentSnapsForGirls =
+                    asyncsnaphot.data.docs;
+                List<DocumentSnapshot> documentSnapsForBoys =
+                    asyncsnaphot.data.docs;
+                return Center(
+                  child: widget.isGirl == true
+                      ? Text(
+                          "${documentSnapsForGirls[randomNumberForGirls].get('female name')}")
+                      : Text(
+                          "${documentSnapsForBoys[randomNumberForBoys].get('male name')}"),
+                );
+              }
+              return const Center(child: CircularProgressIndicator());
+            }),
       ),
     );
   }
 }
+
+//               FavoriteButton(
+//                 isFavorite: false,
+//                 // iconDisabledColor: Colors.white,
+//                 valueChanged: (_isFavorite) {},
+//               ),

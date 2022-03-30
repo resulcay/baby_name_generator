@@ -10,8 +10,7 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  String? kontrol;
-
+  bool isGirl = true;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -28,8 +27,8 @@ class _HomeViewState extends State<HomeView> {
                   bottomLeft: Radius.elliptical(50.0, 50.0),
                 ),
                 gradient: LinearGradient(colors: [
-                  Colors.pink.shade200,
-                  Colors.teal.shade300,
+                  Colors.pink.shade300,
+                  Colors.blue.shade300,
                 ])),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -77,13 +76,14 @@ class _HomeViewState extends State<HomeView> {
                             ),
                             TextButton(
                               onPressed: () {
-                                String female = 'KIZ';
-                                kontrol = female;
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            GeneratedName(kontrol: kontrol)));
+                                isGirl = true;
+                                isGirl == true
+                                    ? Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                ResultPage(isGirl: isGirl)))
+                                    : Container();
                               },
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(30),
@@ -109,14 +109,14 @@ class _HomeViewState extends State<HomeView> {
                             TextButton(
                                 //   style: ButtonStyle(),
                                 onPressed: () {
-                                  String male = 'ERKEK';
-                                  kontrol = male;
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => GeneratedName(
-                                                kontrol: kontrol,
-                                              )));
+                                  isGirl = false;
+                                  isGirl == false
+                                      ? Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ResultPage(isGirl: isGirl)))
+                                      : Container();
                                 },
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(20),
