@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1019792523621",
+    "project_id": "baby-name-generator-9f913",
+    "storage_bucket": "baby-name-generator-9f913.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1019792523621:android:0556265d5d3468e3dd618c",
+        "android_client_info": {
+          "package_name": "com.example.baby_name_generator"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1019792523621-57favk84ngns4mtrcssv13pkbc4o5rf7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZbs7sTQop8fPX69ZeTY_n8Qm9wy4TfEU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1019792523621-57favk84ngns4mtrcssv13pkbc4o5rf7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
