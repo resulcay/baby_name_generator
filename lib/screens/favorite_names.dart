@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'name_pool.dart';
+import '../constants/name_pool.dart';
 
 class FavoriteName extends StatefulWidget {
   const FavoriteName({Key? key}) : super(key: key);

@@ -1,4 +1,4 @@
-import 'package:baby_name_generator/name.dart';
+import 'package:baby_name_generator/constants/name.dart';
 
 class GirlNamePool {
   List<GirlName> girlNames = [

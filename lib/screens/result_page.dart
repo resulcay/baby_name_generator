@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:baby_name_generator/name_pool.dart';
+import 'package:baby_name_generator/constants/name_pool.dart';
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 
