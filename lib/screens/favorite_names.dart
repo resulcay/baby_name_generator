@@ -1,50 +1,31 @@
 import 'package:flutter/material.dart';
 
-import '../constants/name_pool.dart';
-
-class FavoriteName extends StatefulWidget {
-  const FavoriteName({Key? key}) : super(key: key);
+class FavoriteNames extends StatefulWidget {
+  const FavoriteNames({Key? key}) : super(key: key);
 
   @override
-  _FavoriteNameState createState() => _FavoriteNameState();
+  State<FavoriteNames> createState() => _FavoriteNamesState();
 }
 
-class _FavoriteNameState extends State<FavoriteName> {
-  GirlNamePool extactgirl_1 = GirlNamePool();
-  BoyNamePool extractboy_1 = BoyNamePool();
+class _FavoriteNamesState extends State<FavoriteNames> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey,
-      appBar: AppBar(
-        title: const Text('Favori İsimlerim'),
-        backgroundColor: Colors.teal,
+      appBar: AppBar(title: const Text("Favori İsimlerim")),
+      body: SafeArea(
+        child: Flexible(
+          child: ListView.builder(
+            itemCount: 50,
+            itemBuilder: (context, _) {
+              return const Card(
+                elevation: 1,
+                child: Text("Some Names"),
+                color: Colors.blueAccent,
+              );
+            },
+          ),
+        ),
       ),
-      body: ListView.builder(
-          padding: const EdgeInsets.all(4),
-          itemCount: 5,
-          itemBuilder: (context, _) {
-            return boyListTile;
-          }),
     );
   }
 }
-
-ListTile girlListTile = ListTile(
-  title: const Text("gname"),
-  tileColor: Colors.pink,
-  leading: const Icon(Icons.favorite),
-  onTap: () {
-    const Text('gname exp');
-  },
-);
-
-ListTile boyListTile = ListTile(
-  title: const Text('Hakan'),
-  subtitle: const Text('Hükümdar anlamına gelir'),
-  tileColor: Colors.indigo,
-  leading: const Icon(Icons.favorite),
-  onTap: () {
-    const Text('bname exp');
-  },
-);

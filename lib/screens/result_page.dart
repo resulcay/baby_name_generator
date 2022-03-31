@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:baby_name_generator/components/box_decoration.dart';
 import 'package:baby_name_generator/firebase.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -29,17 +30,58 @@ class _ResultPageState extends State<ResultPage> {
                   child: Text("An Error Occured"),
                 );
               } else if (asyncsnaphot.hasData) {
-                List<DocumentSnapshot> documentSnapsForGirls =
-                    asyncsnaphot.data.docs;
-                List<DocumentSnapshot> documentSnapsForBoys =
-                    asyncsnaphot.data.docs;
-                return Center(
-                  child: widget.isGirl == true
-                      ? Text(
-                          "${documentSnapsForGirls[randomNumberForGirls].get('female name')}")
-                      : Text(
-                          "${documentSnapsForBoys[randomNumberForBoys].get('male name')}"),
-                );
+                try {
+                  List<DocumentSnapshot> documentSnaps = asyncsnaphot.data.docs;
+                  return Center(
+                    child: widget.isGirl == true
+                        ? Container(
+                            width: double.infinity,
+                            height: double.infinity,
+                            decoration: buildBoxDecoration(),
+                            child: Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "${documentSnaps[randomNumberForGirls].get('female name')}",
+                                    style: const TextStyle(
+                                      fontSize: 40,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 20),
+                                  Text(
+                                      "${documentSnaps[randomNumberForGirls].get('description')}"),
+                                ],
+                              ),
+                            ),
+                          )
+                        : Container(
+                            width: double.infinity,
+                            height: double.infinity,
+                            decoration: buildBoxDecoration(),
+                            child: Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "${documentSnaps[randomNumberForBoys].get('male name')}",
+                                    style: const TextStyle(
+                                      fontSize: 40,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 20),
+                                  Text(
+                                      "${documentSnaps[randomNumberForBoys].get('description')}"),
+                                ],
+                              ),
+                            ),
+                          ),
+                  );
+                } catch (e) {
+                  customSnackBar(e.toString(), context);
+                }
               }
               return const Center(child: CircularProgressIndicator());
             }),

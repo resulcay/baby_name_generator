@@ -1,6 +1,7 @@
 import 'package:baby_name_generator/screens/result_page.dart';
 import 'package:flutter/material.dart';
 
+import '../components/box_decoration.dart';
 import 'favorite_names.dart';
 
 class HomeView extends StatefulWidget {
@@ -19,17 +20,7 @@ class _HomeViewState extends State<HomeView> {
         body: Center(
           child: Container(
             alignment: Alignment.bottomCenter,
-            decoration: BoxDecoration(
-                borderRadius: const BorderRadius.only(
-                  topRight: Radius.elliptical(0.0, 0.0),
-                  topLeft: Radius.elliptical(50.0, 50.0),
-                  bottomRight: Radius.elliptical(50.0, 50.0),
-                  bottomLeft: Radius.elliptical(50.0, 50.0),
-                ),
-                gradient: LinearGradient(colors: [
-                  Colors.pink.shade300,
-                  Colors.blue.shade300,
-                ])),
+            decoration: buildBoxDecoration(),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -47,7 +38,7 @@ class _HomeViewState extends State<HomeView> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const FavoriteName(),
+                              builder: (context) => const FavoriteNames(),
                             ),
                           );
                         },
