@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:baby_name_generator/components/box_decoration.dart';
 import 'package:baby_name_generator/firebase.dart';
+import 'package:baby_name_generator/local_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
@@ -56,8 +57,21 @@ class _ResultPageState extends State<ResultPage> {
                                       const SizedBox(
                                         width: 20,
                                       ),
-                                      FavoriteButton(
-                                          valueChanged: (isForSave) {})
+                                      FavoriteButton(valueChanged: (isForSave) {
+                                        var x =
+                                            documentSnaps[randomNumberForGirls]
+                                                .get('female name');
+                                        var y =
+                                            documentSnaps[randomNumberForGirls]
+                                                .get('description');
+                                        isForSave == true
+                                            ? LocalStorage()
+                                                .saveGirlNameAndDescToSharedPref(
+                                                    'elif', 'elif desc')
+                                            : LocalStorage()
+                                                .deleteGirlNameAndDescFromSharedPref(
+                                                    x);
+                                      })
                                     ],
                                   ),
                                   const SizedBox(height: 20),
