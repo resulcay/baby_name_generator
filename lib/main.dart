@@ -1,3 +1,4 @@
+import 'package:baby_name_generator/firebase.dart';
 import 'package:baby_name_generator/screens/home_view.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -23,17 +24,20 @@ class _BebekUygulamasiState extends State<BebekUygulamasi> {
       home: FutureBuilder(
         future: _initializeApp,
         builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            return const Center(
-              child: Text("An Error Occured!"),
-            );
-          } else if (snapshot.hasData) {
-            return const HomeView();
-          } else {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
+          try {
+            if (snapshot.hasError) {
+              return const Center(
+                child: Text("An Error Occured!"),
+              );
+            } else if (snapshot.hasData) {
+              return const HomeView();
+            }
+          } catch (e) {
+            BackEnd().customSnackBar(e.toString(), context);
           }
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
         },
       ),
     );

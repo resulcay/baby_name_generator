@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:baby_name_generator/components/box_decoration.dart';
 import 'package:baby_name_generator/firebase.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 
 class ResultPage extends StatefulWidget {
@@ -22,8 +23,8 @@ class _ResultPageState extends State<ResultPage> {
       body: Center(
         child: StreamBuilder(
             stream: widget.isGirl == true
-                ? girlMethod().snapshots()
-                : boyMethod().snapshots(),
+                ? BackEnd().girlMethod().snapshots()
+                : BackEnd().boyMethod().snapshots(),
             builder: (BuildContext context, AsyncSnapshot asyncsnaphot) {
               if (asyncsnaphot.hasError) {
                 const Center(
@@ -42,12 +43,22 @@ class _ResultPageState extends State<ResultPage> {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text(
-                                    "${documentSnaps[randomNumberForGirls].get('female name')}",
-                                    style: const TextStyle(
-                                      fontSize: 40,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        "${documentSnaps[randomNumberForGirls].get('female name')}",
+                                        style: const TextStyle(
+                                          fontSize: 40,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        width: 20,
+                                      ),
+                                      FavoriteButton(
+                                          valueChanged: (isForSave) {})
+                                    ],
                                   ),
                                   const SizedBox(height: 20),
                                   Text(
@@ -80,7 +91,7 @@ class _ResultPageState extends State<ResultPage> {
                           ),
                   );
                 } catch (e) {
-                  customSnackBar(e.toString(), context);
+                  BackEnd().customSnackBar(e.toString(), context);
                 }
               }
               return const Center(child: CircularProgressIndicator());
@@ -89,9 +100,3 @@ class _ResultPageState extends State<ResultPage> {
     );
   }
 }
-
-//               FavoriteButton(
-//                 isFavorite: false,
-//                 // iconDisabledColor: Colors.white,
-//                 valueChanged: (_isFavorite) {},
-//               ),
