@@ -57,20 +57,21 @@ class _ResultPageState extends State<ResultPage> {
                                       const SizedBox(
                                         width: 20,
                                       ),
-                                      FavoriteButton(valueChanged: (isForSave) {
+                                      FavoriteButton(
+                                          valueChanged: (isForSave) async {
                                         var x =
                                             documentSnaps[randomNumberForGirls]
                                                 .get('female name');
                                         var y =
                                             documentSnaps[randomNumberForGirls]
                                                 .get('description');
-                                        isForSave == true
+                                        await isForSave == true
                                             ? LocalStorage()
                                                 .saveGirlNameAndDescToSharedPref(
-                                                    'elif', 'elif desc')
+                                                    x.toString(), y.toString())
                                             : LocalStorage()
                                                 .deleteGirlNameAndDescFromSharedPref(
-                                                    x);
+                                                    x.toString());
                                       })
                                     ],
                                   ),

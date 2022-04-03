@@ -1,10 +1,12 @@
 import 'package:baby_name_generator/firebase.dart';
+import 'package:baby_name_generator/local_storage.dart';
 import 'package:baby_name_generator/screens/home_view.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await LocalStorage().createSharedPrefObject();
   runApp(const BebekUygulamasi());
 }
 

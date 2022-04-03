@@ -12,6 +12,7 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   bool isGirl = true;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -30,7 +31,7 @@ class _HomeViewState extends State<HomeView> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       const Text(
-                        'Favori İsimlerim',
+                        "Favori İsimlerim",
                         style: TextStyle(fontSize: 17),
                       ),
                       IconButton(
