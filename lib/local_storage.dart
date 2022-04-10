@@ -1,3 +1,5 @@
+import 'dart:core';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalStorage {
@@ -10,7 +12,7 @@ class LocalStorage {
   Future saveGirlNameAndDescToSharedPref(
       String girlName, String girlDescription) async {
     await createSharedPrefObject();
-    await sharedPrefs.setString(girlName, girlDescription);
+    await sharedPrefs.setStringList("girlNames", [girlName, girlDescription]);
   }
 
   Future deleteGirlNameAndDescFromSharedPref(String girlName) async {
@@ -18,9 +20,10 @@ class LocalStorage {
     await sharedPrefs.remove(girlName);
   }
 
-  Future<String?> viewGirlNameAndDescFromSharedPref() async {
+  Future<List<String>?> viewGirlNameAndDescFromSharedPref() async {
     await createSharedPrefObject();
-    final String? value = sharedPrefs.getString("chen");
-    return value ?? "nullll";
+    var value = sharedPrefs.getStringList("girlNames");
+
+    return value;
   }
 }

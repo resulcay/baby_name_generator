@@ -12,22 +12,23 @@ class _FavoriteNamesState extends State<FavoriteNames> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FutureBuilder<String?>(
+      body: FutureBuilder<List<String>?>(
           future: LocalStorage().viewGirlNameAndDescFromSharedPref(),
           builder: (BuildContext buildContext,
-              AsyncSnapshot<String?> asyncSnapshot) {
+              AsyncSnapshot<List<String>?> asyncSnapshot) {
             if (asyncSnapshot.hasData) {
-              final theText = asyncSnapshot.data;
+              final List<String>? theText = asyncSnapshot.data;
               return Center(
                 child: ListView.builder(
-                    itemCount: 50,
-                    itemBuilder: (context, _) {
-                      return ListTile(
-                        tileColor: Colors.teal,
-                        leading: const Text("some names"),
-                        title: const Text("some desc"),
-                        trailing: IconButton(
-                            onPressed: () {}, icon: const Icon(Icons.delete)),
+                    itemCount: 2,
+                    itemBuilder: (context, index) {
+                      return Card(
+                        child: Column(
+                          children: [
+                            Text(theText![index]),
+                            //Text(theText[index + 1])
+                          ],
+                        ),
                       );
                     }),
               );
@@ -39,3 +40,11 @@ class _FavoriteNamesState extends State<FavoriteNames> {
     );
   }
 }
+
+// ListTile(
+//                         tileColor: Colors.teal,
+//                         leading: Text(theText![0]),
+//                         title: Text(theText[1]),
+//                         trailing: IconButton(
+//                             onPressed: () {}, icon: const Icon(Icons.delete)),
+//                       )
