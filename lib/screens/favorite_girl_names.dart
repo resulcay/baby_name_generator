@@ -1,7 +1,7 @@
-import 'package:baby_name_generator/view/girl_list/model/girlDatabaseProvider.dart';
+import 'package:baby_name_generator/view/girl_list/model/girl_database_provider.dart';
 import 'package:flutter/material.dart';
 
-import '../girl_model.dart';
+import '../models/girl_model.dart';
 
 class FavoriteGirlNames extends StatefulWidget {
   const FavoriteGirlNames({Key? key}) : super(key: key);

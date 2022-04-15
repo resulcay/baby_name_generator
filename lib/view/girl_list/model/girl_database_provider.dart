@@ -1,5 +1,6 @@
-import 'package:baby_name_generator/girl_model.dart';
 import 'package:sqflite/sqflite.dart';
+
+import '../../../models/girl_model.dart';
 
 class GirlDatabaseProvider {
   static late Database database;

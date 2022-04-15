@@ -2,15 +2,15 @@ import 'dart:math';
 
 import 'package:baby_name_generator/components/box_decoration.dart';
 import 'package:baby_name_generator/firebase.dart';
-import 'package:baby_name_generator/girl_model.dart';
 import 'package:baby_name_generator/screens/home_view.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 
-import '../boy_model.dart';
-import '../view/boy_list/model/boyDatabaseProvider.dart';
-import '../view/girl_list/model/girlDatabaseProvider.dart';
+import '../models/boy_model.dart';
+import '../models/girl_model.dart';
+import '../view/boy_list/model/boy_database_provider.dart';
+import '../view/girl_list/model/girl_database_provider.dart';
 
 class ResultPage extends StatefulWidget {
   const ResultPage({Key? key, required this.isGirl}) : super(key: key);

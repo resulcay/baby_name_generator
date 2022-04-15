@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../boy_model.dart';
-import '../view/boy_list/model/boyDatabaseProvider.dart';
+import '../models/boy_model.dart';
+import '../view/boy_list/model/boy_database_provider.dart';
 
 class FavoriteBoyNames extends StatefulWidget {
   const FavoriteBoyNames({Key? key}) : super(key: key);
