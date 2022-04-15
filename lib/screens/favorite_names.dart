@@ -18,8 +18,8 @@ class _FavoriteNamesState extends State<FavoriteNames> {
           future: GirlDatabaseProvider().getGirls(),
           builder: (BuildContext buildContext,
               AsyncSnapshot<List<Girl>> asyncSnapshot) {
-            String name = "namemem";
-            String description = "dessees";
+            String name = "";
+            String description = "";
             int id = 0;
 
             final List<Girl>? ass = asyncSnapshot.data;

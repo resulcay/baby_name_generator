@@ -8,6 +8,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 
+import '../view/girl_list/model/boyDatabaseProvider.dart';
 import '../view/girl_list/model/girlDatabaseProvider.dart';
 
 class ResultPage extends StatefulWidget {
@@ -21,7 +22,7 @@ class ResultPage extends StatefulWidget {
 class _ResultPageState extends State<ResultPage> {
   @override
   Widget build(BuildContext context) {
-    int randomNumberForGirls = Random().nextInt(3);
+    int randomNumberForGirls = Random().nextInt(4);
     int randomNumberForBoys = Random().nextInt(3);
     return Scaffold(
       body: Center(
@@ -70,28 +71,30 @@ class _ResultPageState extends State<ResultPage> {
                                   Text(
                                       "${documentSnaps[randomNumberForGirls].get('description')}"),
                                   IconButton(
-                                      onPressed: () {
-                                        var x =
-                                            documentSnaps[randomNumberForGirls]
-                                                .get('female name');
-                                        var y =
-                                            documentSnaps[randomNumberForGirls]
-                                                .get('description');
+                                    onPressed: () {
+                                      String extractedFemaleName =
+                                          documentSnaps[randomNumberForGirls]
+                                              .get('female name');
+                                      String extractedFemaleDescription =
+                                          documentSnaps[randomNumberForGirls]
+                                              .get('description');
 
-                                        Girl girl =
-                                            Girl(name: x, description: y);
-                                        forceSave == true
-                                            ? GirlDatabaseProvider()
-                                                .addGirl(girl)
-                                            : null;
+                                      Girl girl = Girl(
+                                          name: extractedFemaleName,
+                                          description:
+                                              extractedFemaleDescription);
+                                      forceSave == true
+                                          ? GirlDatabaseProvider().addGirl(girl)
+                                          : null;
 
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    const HomeView()));
-                                      },
-                                      icon: const Icon(Icons.arrow_back))
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const HomeView()));
+                                    },
+                                    icon: const Icon(Icons.arrow_back),
+                                  ),
                                 ],
                               ),
                             ),
@@ -104,16 +107,52 @@ class _ResultPageState extends State<ResultPage> {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text(
-                                    "${documentSnaps[randomNumberForBoys].get('male name')}",
-                                    style: const TextStyle(
-                                      fontSize: 40,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        "${documentSnaps[randomNumberForBoys].get('male name')}",
+                                        style: const TextStyle(
+                                          fontSize: 40,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        width: 20,
+                                      ),
+                                      FavoriteButton(valueChanged: (isForSave) {
+                                        forceSave = isForSave;
+                                      })
+                                    ],
                                   ),
                                   const SizedBox(height: 20),
                                   Text(
                                       "${documentSnaps[randomNumberForBoys].get('description')}"),
+                                  IconButton(
+                                    onPressed: () {
+                                      String extractedMaleName =
+                                          documentSnaps[randomNumberForBoys]
+                                              .get('male name');
+                                      String extractedMaleDescription =
+                                          documentSnaps[randomNumberForBoys]
+                                              .get('description');
+
+                                      Boy boy = Boy(
+                                          name: extractedMaleName,
+                                          description:
+                                              extractedMaleDescription);
+                                      forceSave == true
+                                          ? BoyDatabaseProvider().addBoy(boy)
+                                          : null;
+
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const HomeView()));
+                                    },
+                                    icon: const Icon(Icons.arrow_back),
+                                  ),
                                 ],
                               ),
                             ),

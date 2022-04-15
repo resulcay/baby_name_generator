@@ -3,14 +3,14 @@ import 'package:sqflite/sqflite.dart';
 
 class GirlDatabaseProvider {
   static late Database database;
-  static const String _girlDBpath = "girlDB";
+  static const String _girlDBpath = "dbForGirl";
   static const int _version = 1;
-  static const String _girlTableName = "girl";
+  static const String _girlTableName = "Girls";
   static const String columnGirlId = "girlId";
   static const String columnName = "name";
   static const String columnDescription = "description";
 
-  Future<void> openDBforGirl() async {
+  Future<void> openDBforGirls() async {
     database = await openDatabase(_girlDBpath, version: _version,
         onCreate: (db, version) {
       createTable(db);
@@ -66,17 +66,31 @@ class GirlDatabaseProvider {
     return girlMapList != null;
   }
 
-  Future<bool> addGirl(Girl girl) async {
+  Future<bool> addGirl(Girl female) async {
+    List<Map<String, dynamic>> maps = await database.rawQuery(
+        "SELECT*FROM $_girlTableName WHERE  $columnName='" + female.name + "'");
+
+    if (maps.isNotEmpty) {
+      print("not added");
+      return false;
+    }
+
     final girlMapList = await database.insert(
       _girlTableName,
-      girl.toJson(),
+      female.toJson(),
     );
 
     print("Added Successfuly");
     return girlMapList != null;
   }
 
-  Future<void> closeDBforGirl() async {
+  Future<void> closeDBforGirls() async {
     await database.close();
+  }
+
+  Future<void> cleanDatabaseForGirls() async {
+    String start = 'delete from ';
+    await database.execute(start + _girlTableName);
+    print("Clean Succesful");
   }
 }
