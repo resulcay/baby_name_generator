@@ -1,12 +1,12 @@
 import 'package:baby_name_generator/firebase.dart';
-import 'package:baby_name_generator/local_storage.dart';
 import 'package:baby_name_generator/screens/home_view.dart';
+import 'package:baby_name_generator/view/girl_list/model/girlDatabaseProvider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await LocalStorage().createSharedPrefObject();
+  await GirlDatabaseProvider().openDBforGirl();
   runApp(const BebekUygulamasi());
 }
 

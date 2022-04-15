@@ -3,9 +3,12 @@ import 'dart:math';
 import 'package:baby_name_generator/components/box_decoration.dart';
 import 'package:baby_name_generator/firebase.dart';
 import 'package:baby_name_generator/local_storage.dart';
+import 'package:baby_name_generator/screens/home_view.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
+
+import '../view/girl_list/model/girlDatabaseProvider.dart';
 
 class ResultPage extends StatefulWidget {
   const ResultPage({Key? key, required this.isGirl}) : super(key: key);
@@ -34,6 +37,7 @@ class _ResultPageState extends State<ResultPage> {
               } else if (asyncsnaphot.hasData) {
                 try {
                   List<DocumentSnapshot> documentSnaps = asyncsnaphot.data.docs;
+                  bool forceSave = false;
                   return Center(
                     child: widget.isGirl == true
                         ? Container(
@@ -57,27 +61,37 @@ class _ResultPageState extends State<ResultPage> {
                                       const SizedBox(
                                         width: 20,
                                       ),
-                                      FavoriteButton(
-                                          valueChanged: (isForSave) async {
-                                        var x =
-                                            documentSnaps[randomNumberForGirls]
-                                                .get('female name');
-                                        var y =
-                                            documentSnaps[randomNumberForGirls]
-                                                .get('description');
-                                        await isForSave == true
-                                            ? LocalStorage()
-                                                .saveGirlNameAndDescToSharedPref(
-                                                    x.toString(), y.toString())
-                                            : LocalStorage()
-                                                .deleteGirlNameAndDescFromSharedPref(
-                                                    x.toString());
+                                      FavoriteButton(valueChanged: (isForSave) {
+                                        forceSave = isForSave;
                                       })
                                     ],
                                   ),
                                   const SizedBox(height: 20),
                                   Text(
                                       "${documentSnaps[randomNumberForGirls].get('description')}"),
+                                  IconButton(
+                                      onPressed: () {
+                                        var x =
+                                            documentSnaps[randomNumberForGirls]
+                                                .get('female name');
+                                        var y =
+                                            documentSnaps[randomNumberForGirls]
+                                                .get('description');
+
+                                        Girl girl =
+                                            Girl(name: x, description: y);
+                                        forceSave == true
+                                            ? GirlDatabaseProvider()
+                                                .addGirl(girl)
+                                            : null;
+
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const HomeView()));
+                                      },
+                                      icon: const Icon(Icons.arrow_back))
                                 ],
                               ),
                             ),

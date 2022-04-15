@@ -1,29 +1,21 @@
-import 'dart:core';
+class Girl {
+  late final int girlId;
+  late final String name;
+  late final String description;
 
-import 'package:shared_preferences/shared_preferences.dart';
+  Girl({required this.name, required this.description});
 
-class LocalStorage {
-  String value = "default";
-  late SharedPreferences sharedPrefs;
-  Future createSharedPrefObject() async {
-    sharedPrefs = await SharedPreferences.getInstance();
+  Girl.fromJson(Map<String, dynamic> json) {
+    girlId = json['girlId'];
+    name = json['name'];
+    description = json['description'];
   }
 
-  Future saveGirlNameAndDescToSharedPref(
-      String girlName, String girlDescription) async {
-    await createSharedPrefObject();
-    await sharedPrefs.setStringList("girlNames", [girlName, girlDescription]);
-  }
-
-  Future deleteGirlNameAndDescFromSharedPref(String girlName) async {
-    await createSharedPrefObject();
-    await sharedPrefs.remove(girlName);
-  }
-
-  Future<List<String>?> viewGirlNameAndDescFromSharedPref() async {
-    await createSharedPrefObject();
-    var value = sharedPrefs.getStringList("girlNames");
-
-    return value;
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    // Because of SQLite PrimaryKey Constrains.
+    data['name'] = name;
+    data['description'] = description;
+    return data;
   }
 }

@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.baby_name_generator">
    <application
-        android:label="baby_name_generator"
+        android:label="Baby Name Generator"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
