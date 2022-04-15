@@ -1,5 +1,6 @@
 import 'package:baby_name_generator/firebase.dart';
 import 'package:baby_name_generator/screens/home_view.dart';
+import 'package:baby_name_generator/view/girl_list/model/boyDatabaseProvider.dart';
 import 'package:baby_name_generator/view/girl_list/model/girlDatabaseProvider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -7,17 +8,18 @@ import 'package:flutter/material.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GirlDatabaseProvider().openDBforGirls();
-  runApp(const BebekUygulamasi());
+  await BoyDatabaseProvider().openDBforBoys();
+  runApp(const RootOfApp());
 }
 
-class BebekUygulamasi extends StatefulWidget {
-  const BebekUygulamasi({Key? key}) : super(key: key);
+class RootOfApp extends StatefulWidget {
+  const RootOfApp({Key? key}) : super(key: key);
 
   @override
-  _BebekUygulamasiState createState() => _BebekUygulamasiState();
+  _RootOfAppState createState() => _RootOfAppState();
 }
 
-class _BebekUygulamasiState extends State<BebekUygulamasi> {
+class _RootOfAppState extends State<RootOfApp> {
   @override
   Widget build(BuildContext context) {
     final Future<FirebaseApp> _initializeApp = Firebase.initializeApp();

@@ -3,18 +3,18 @@ import 'package:flutter/material.dart';
 
 import '../local_storage.dart';
 
-class FavoriteNames extends StatefulWidget {
-  const FavoriteNames({Key? key}) : super(key: key);
+class FavoriteGirlNames extends StatefulWidget {
+  const FavoriteGirlNames({Key? key}) : super(key: key);
 
   @override
-  State<FavoriteNames> createState() => _FavoriteNamesState();
+  State<FavoriteGirlNames> createState() => _FavoriteGirlNamesState();
 }
 
-class _FavoriteNamesState extends State<FavoriteNames> {
+class _FavoriteGirlNamesState extends State<FavoriteGirlNames> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FutureBuilder<List<Girl>>(
+      body: FutureBuilder(
           future: GirlDatabaseProvider().getGirls(),
           builder: (BuildContext buildContext,
               AsyncSnapshot<List<Girl>> asyncSnapshot) {
@@ -45,7 +45,7 @@ class _FavoriteNamesState extends State<FavoriteNames> {
               );
             } else if (asyncSnapshot.hasData) {
               return ListView.builder(
-                  itemCount: ass?.length,
+                  itemCount: ass == null ? 0 : ass.length,
                   itemBuilder: (BuildContext buildContext, index) {
                     return Center(
                       child: Column(

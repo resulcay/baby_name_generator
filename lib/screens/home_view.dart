@@ -1,8 +1,8 @@
+import 'package:baby_name_generator/screens/choice_screen.dart';
 import 'package:baby_name_generator/screens/result_page.dart';
 import 'package:flutter/material.dart';
 
 import '../components/box_decoration.dart';
-import 'favorite_names.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -39,7 +39,7 @@ class _HomeViewState extends State<HomeView> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const FavoriteNames(),
+                              builder: (context) => const ChoiceScreen(),
                             ),
                           );
                         },
