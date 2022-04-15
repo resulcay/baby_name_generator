@@ -1,4 +1,4 @@
-import 'package:baby_name_generator/local_storage.dart';
+import 'package:baby_name_generator/girl_model.dart';
 import 'package:sqflite/sqflite.dart';
 
 class GirlDatabaseProvider {
@@ -25,7 +25,6 @@ class GirlDatabaseProvider {
   Future<List<Girl>> getGirls() async {
     List<Map<String, dynamic>> girlMapList =
         await database.query(_girlTableName);
-    print("Girls fetched Successfuly");
     return girlMapList.map((e) => Girl.fromJson(e)).toList();
   }
 
@@ -38,7 +37,6 @@ class GirlDatabaseProvider {
     );
 
     if (girlMapList.isNotEmpty) {
-      print("Girl fetched Successfuly");
       return Girl.fromJson(girlMapList.first);
     } else {
       return null;
@@ -51,7 +49,7 @@ class GirlDatabaseProvider {
       where: '$columnGirlId = ?',
       whereArgs: [id],
     );
-    print("Deleted Successfuly");
+
     return girlMapList != null;
   }
 
@@ -62,7 +60,7 @@ class GirlDatabaseProvider {
       where: columnGirlId,
       whereArgs: [id],
     );
-    print("Updated Successfuly");
+
     return girlMapList != null;
   }
 
@@ -71,7 +69,6 @@ class GirlDatabaseProvider {
         "SELECT*FROM $_girlTableName WHERE  $columnName='" + female.name + "'");
 
     if (maps.isNotEmpty) {
-      print("not added");
       return false;
     }
 
@@ -80,7 +77,6 @@ class GirlDatabaseProvider {
       female.toJson(),
     );
 
-    print("Added Successfuly");
     return girlMapList != null;
   }
 
@@ -91,6 +87,5 @@ class GirlDatabaseProvider {
   Future<void> cleanDatabaseForGirls() async {
     String start = 'delete from ';
     await database.execute(start + _girlTableName);
-    print("Clean Succesful");
   }
 }

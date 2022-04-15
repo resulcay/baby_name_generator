@@ -1,7 +1,7 @@
-import 'package:baby_name_generator/view/girl_list/model/boyDatabaseProvider.dart';
 import 'package:flutter/material.dart';
 
-import '../local_storage.dart';
+import '../boy_model.dart';
+import '../view/boy_list/model/boyDatabaseProvider.dart';
 
 class FavoriteBoyNames extends StatefulWidget {
   const FavoriteBoyNames({Key? key}) : super(key: key);
@@ -47,12 +47,34 @@ class _FavoriteBoyNamesState extends State<FavoriteBoyNames> {
               return ListView.builder(
                   itemCount: list == null ? 0 : list.length,
                   itemBuilder: (BuildContext buildContext, index) {
+                    int counter = index;
+                    counter++;
                     return Center(
-                      child: Column(
+                      child: Row(
                         children: [
-                          Text(openBoyId(list![index]).toString()),
-                          Text(openBoyName(list[index])),
+                          CircleAvatar(
+                              radius: 20.0,
+                              backgroundColor: Colors.blue.shade500,
+                              child: Text(counter.toString())),
+                          const SizedBox(
+                            width: 40,
+                          ),
+                          Text(openBoyName(list![index])),
+                          const SizedBox(
+                            width: 40,
+                          ),
                           Text(openBoyDesc(list[index])),
+                          const SizedBox(
+                            width: 40,
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              BoyDatabaseProvider()
+                                  .deleteBoy(openBoyId(list[index]));
+                              setState(() {});
+                            },
+                            icon: const Icon(Icons.delete),
+                          )
                         ],
                       ),
                     );

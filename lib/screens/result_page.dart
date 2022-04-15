@@ -2,13 +2,14 @@ import 'dart:math';
 
 import 'package:baby_name_generator/components/box_decoration.dart';
 import 'package:baby_name_generator/firebase.dart';
-import 'package:baby_name_generator/local_storage.dart';
+import 'package:baby_name_generator/girl_model.dart';
 import 'package:baby_name_generator/screens/home_view.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 
-import '../view/girl_list/model/boyDatabaseProvider.dart';
+import '../boy_model.dart';
+import '../view/boy_list/model/boyDatabaseProvider.dart';
 import '../view/girl_list/model/girlDatabaseProvider.dart';
 
 class ResultPage extends StatefulWidget {
@@ -23,7 +24,7 @@ class _ResultPageState extends State<ResultPage> {
   @override
   Widget build(BuildContext context) {
     int randomNumberForGirls = Random().nextInt(4);
-    int randomNumberForBoys = Random().nextInt(3);
+    int randomNumberForBoys = Random().nextInt(4);
     return Scaffold(
       body: Center(
         child: StreamBuilder(

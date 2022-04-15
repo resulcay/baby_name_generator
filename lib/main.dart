@@ -1,6 +1,6 @@
 import 'package:baby_name_generator/firebase.dart';
 import 'package:baby_name_generator/screens/home_view.dart';
-import 'package:baby_name_generator/view/girl_list/model/boyDatabaseProvider.dart';
+import 'package:baby_name_generator/view/boy_list/model/boyDatabaseProvider.dart';
 import 'package:baby_name_generator/view/girl_list/model/girlDatabaseProvider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';

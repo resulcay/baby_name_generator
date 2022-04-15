@@ -1,7 +1,7 @@
 import 'package:baby_name_generator/view/girl_list/model/girlDatabaseProvider.dart';
 import 'package:flutter/material.dart';
 
-import '../local_storage.dart';
+import '../girl_model.dart';
 
 class FavoriteGirlNames extends StatefulWidget {
   const FavoriteGirlNames({Key? key}) : super(key: key);
@@ -22,7 +22,7 @@ class _FavoriteGirlNamesState extends State<FavoriteGirlNames> {
             String description = "";
             int id = 0;
 
-            final List<Girl>? ass = asyncSnapshot.data;
+            final List<Girl>? list = asyncSnapshot.data;
 
             String openGirlName(Girl girl) {
               name = girl.name;
@@ -45,14 +45,36 @@ class _FavoriteGirlNamesState extends State<FavoriteGirlNames> {
               );
             } else if (asyncSnapshot.hasData) {
               return ListView.builder(
-                  itemCount: ass == null ? 0 : ass.length,
+                  itemCount: list == null ? 0 : list.length,
                   itemBuilder: (BuildContext buildContext, index) {
+                    int counter = index;
+                    counter++;
                     return Center(
-                      child: Column(
+                      child: Row(
                         children: [
-                          Text(openGirlId(ass![index]).toString()),
-                          Text(openGirlName(ass[index])),
-                          Text(openGirlDesc(ass[index])),
+                          CircleAvatar(
+                              radius: 20.0,
+                              backgroundColor: Colors.blue.shade500,
+                              child: Text(counter.toString())),
+                          const SizedBox(
+                            width: 40,
+                          ),
+                          Text(openGirlName(list![index])),
+                          const SizedBox(
+                            width: 40,
+                          ),
+                          Text(openGirlDesc(list[index])),
+                          const SizedBox(
+                            width: 40,
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              GirlDatabaseProvider()
+                                  .deleteGirl(openGirlId(list[index]));
+                              setState(() {});
+                            },
+                            icon: const Icon(Icons.delete),
+                          )
                         ],
                       ),
                     );
@@ -66,37 +88,3 @@ class _FavoriteGirlNamesState extends State<FavoriteGirlNames> {
     );
   }
 }
-
-//FutureBuilder<List<String>?>(
-//           future:  LocalStorage().,
-//           builder: (BuildContext buildContext,
-//               AsyncSnapshot<List<String>?> asyncSnapshot) {
-//             if (asyncSnapshot.hasData) {
-//               final List<String>? theText = asyncSnapshot.data;
-//               return Center(
-//                 child: ListView.builder(
-//                     itemCount: 2,
-//                     itemBuilder: (context, index) {
-//                       return Card(
-//                         child: Column(
-//                           children: [
-//                             Text(theText![index]),
-//                             //Text(theText[index + 1])
-//                           ],
-//                         ),
-//                       );
-//                     }),
-//               );
-//             }
-//             return const Center(
-//               child: CircularProgressIndicator(),
-//             );
-//           })
-
-// ListTile(
-//                         tileColor: Colors.teal,
-//                         leading: Text(theText![0]),
-//                         title: Text(theText[1]),
-//                         trailing: IconButton(
-//                             onPressed: () {}, icon: const Icon(Icons.delete)),
-//                       )
