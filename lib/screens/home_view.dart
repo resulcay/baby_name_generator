@@ -21,7 +21,7 @@ class _HomeViewState extends State<HomeView> {
         body: Center(
           child: Container(
             alignment: Alignment.bottomCenter,
-            decoration: buildBoxDecoration(),
+            decoration: buildBoxDecoration2(),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -32,7 +32,7 @@ class _HomeViewState extends State<HomeView> {
                     children: [
                       const Text(
                         "Favori İsimlerim",
-                        style: TextStyle(fontSize: 17),
+                        style: TextStyle(fontSize: 17, color: Colors.white),
                       ),
                       IconButton(
                         onPressed: () {
@@ -64,7 +64,7 @@ class _HomeViewState extends State<HomeView> {
                               style: TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.pink.shade800),
+                                  color: Colors.pink.shade200),
                             ),
                             TextButton(
                               onPressed: () {
@@ -91,12 +91,12 @@ class _HomeViewState extends State<HomeView> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const Text(
+                            Text(
                               'ERKEK',
                               style: TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.indigo),
+                                  color: Colors.indigo.shade200),
                             ),
                             TextButton(
                                 //   style: ButtonStyle(),
