@@ -25,8 +25,8 @@ class _ResultPageState extends State<ResultPage> {
   bool shouldPop = false;
   @override
   Widget build(BuildContext context) {
-    int randomNumberForGirls = Random().nextInt(3);
-    int randomNumberForBoys = Random().nextInt(4);
+    int randomNumberForGirls = Random().nextInt(10);
+    int randomNumberForBoys = Random().nextInt(10);
     return WillPopScope(
       onWillPop: () async {
         return shouldPop;
